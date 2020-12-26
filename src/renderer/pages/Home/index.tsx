@@ -1,17 +1,27 @@
 import { FormEvent, useState } from "react";
+import { useHistory } from "react-router-dom";
+
+/* Components */
+import Loading from "../../components/loading";
 
 /* Services */
 import searchService, { SearchResult } from "../../services/search";
 
+/* Styles */
 import * as Styles from "./styles";
 
 export default function Home() {
+  const history = useHistory();
+
+  const [loading, setLoading] = useState(false);
+
   const [search, setSearch] = useState("");
 
   const [animesResult, setAnimesResult] = useState<SearchResult[]>([]);
 
   async function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setLoading(true);
 
     const animes = await searchService(search);
 
@@ -19,6 +29,11 @@ export default function Home() {
       return alert("Ops! Algo deu errado ao fazer uma busca pelos animes.");
 
     setAnimesResult(animes);
+    setLoading(false);
+  }
+
+  function goAnimePage(name: string, page: string, image: string) {
+    history.push(`/anime?name=${name}&page=${page}&image=${image}`);
   }
 
   return (
@@ -35,10 +50,19 @@ export default function Home() {
         </Styles.SearchButton>
       </Styles.SearchContainer>
 
-      {animesResult.length > 0 && (
+      {loading && (
+        <Styles.LoadingContainer>
+          <Loading />
+        </Styles.LoadingContainer>
+      )}
+
+      {animesResult.length > 0 && !loading && (
         <Styles.ResultsContainer>
           {animesResult.map((anime, index) => (
-            <Styles.ResultItemContainer key={index}>
+            <Styles.ResultItemContainer
+              key={index}
+              onClick={() => goAnimePage(anime.name, anime.page, anime.image)}
+            >
               <img src={anime.image} alt={anime.name} />
               <div>
                 <h5>{anime.name}</h5>

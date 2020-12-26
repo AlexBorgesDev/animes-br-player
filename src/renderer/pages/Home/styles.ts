@@ -17,6 +17,16 @@ export const Container = styled.main`
   justify-content: center;
 `;
 
+export const LoadingContainer = styled.section`
+  width: 100%;
+  height: 128px;
+  margin-top: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Title = styled.h1`
   font-size: 3.2rem;
   font-weight: 700;
