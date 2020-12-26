@@ -1,22 +1,9 @@
 {
   "name": "animes-br-player",
   "version": "0.1.0",
-  "license": "MIT",
-  "scripts": {
-    "dev": "electron-webpack dev",
-    "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
-  },
-  "electronWebpack": {
-    "renderer": {
-      "webpackConfig": "webpack.renderer.additions.js"
-    }
-  },
+  "description": "Player de animes legendados em pt-br, com busca automática inclusa.",
+  "main": "./dist/main.js",
   "dependencies": {
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
     "electron-referer": "^0.3.0",
@@ -24,18 +11,101 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-route": "^1.0.3",
     "react-router-dom": "^5.2.0",
-    "source-map-support": "^0.5.16",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/electron-devtools-installer": "^2.2.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
-    "electron": "8.2.0",
-    "electron-builder": "^22.4.1",
-    "electron-webpack": "^2.8.2",
-    "electron-webpack-ts": "^4.0.1",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.1",
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.21.5",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "style-loader": "^2.0.0",
     "typescript": "^4.1.3",
-    "webpack": "~4.42.1"
-  }
+    "wait-on": "^5.2.1",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.3.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "dev": "npm-run-all -p dev:react electron:serve",
+    "dev:electron": "cross-env NODE_ENV=development webpack --config webpack/electron.webpack.js --mode development && npm run start:electron",
+    "dev:react": "cross-env NODE_ENV=development webpack serve --config webpack/react.webpack.js --mode development",
+    "electron:serve": "wait-on http-get://localhost:4000/ && npm run dev:electron",
+    "start:electron": "electron .",
+    "build": "npm-run-all build:electron build:react",
+    "build:run": "npm-run-all build start:electron",
+    "build:electron": "webpack --config webpack/electron.webpack.js",
+    "build:react": "webpack --config webpack/react.webpack.js",
+    "package": "npm-run-all build package:dist",
+    "package:dist": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.infinity-development.animes-br-player",
+    "productName": "Animes-BR Player",
+    "directories": {
+      "output": "packages"
+    },
+    "nsis": {
+      "artifactName": "Animes-BR_Player.setup.${version}.${ext}",
+      "uninstallDisplayName": "Animes-BR_Player_uninstall"
+    },
+    "mac": {
+      "category": "public.app-category.video"
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Video"
+    },
+    "win": {
+      "icon": "dist/icon.ico",
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "files": [
+      "package.json",
+      "dist/**"
+    ],
+    "copyright": "Copyright © 2020 ${author}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexBorgesDev/animes-br-player.git"
+  },
+  "keywords": [],
+  "author": "Alex Borges Ramos (https://github.com/AlexBorgesDev)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexBorgesDev/animes-br-player/issues"
+  },
+  "homepage": "https://github.com/AlexBorgesDev/animes-br-player#readme"
 }

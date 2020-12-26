@@ -1,4 +1,8 @@
-export default function Loading(props: React.SVGProps<SVGSVGElement>) {
+import React from 'react'
+
+export default function Loading(
+  props: React.SVGProps<SVGSVGElement>
+): JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,5 +26,5 @@ export default function Loading(props: React.SVGProps<SVGSVGElement>) {
         />
       </path>
     </svg>
-  );
+  )
 }

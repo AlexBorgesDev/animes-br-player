@@ -1,39 +1,40 @@
-import { FormEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { FormEvent, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 /* Components */
-import Loading from "../../components/loading";
+import Loading from '../../components/loading'
 
 /* Services */
-import searchService, { SearchResult } from "../../services/search";
+import searchService, { SearchResult } from '../../services/search'
 
 /* Styles */
-import * as Styles from "./styles";
+import * as Styles from './styles'
 
-export default function Home() {
-  const history = useHistory();
+export default function Home(): JSX.Element {
+  const history = useHistory()
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('')
 
-  const [animesResult, setAnimesResult] = useState<SearchResult[]>([]);
+  const [animesResult, setAnimesResult] = useState<SearchResult[]>([])
 
   async function handleSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
+    event.preventDefault()
+    setLoading(true)
 
-    const animes = await searchService(search);
+    const animes = await searchService(search)
 
-    if (!animes)
-      return alert("Ops! Algo deu errado ao fazer uma busca pelos animes.");
+    if (!animes) {
+      return alert('Ops! Algo deu errado ao fazer uma busca pelos animes.')
+    }
 
-    setAnimesResult(animes);
-    setLoading(false);
+    setAnimesResult(animes)
+    setLoading(false)
   }
 
   function goAnimePage(name: string, page: string, image: string) {
-    history.push(`/anime?name=${name}&page=${page}&image=${image}`);
+    history.push(`/anime?name=${name}&page=${page}&image=${image}`)
   }
 
   return (
@@ -43,7 +44,7 @@ export default function Home() {
         <Styles.SearchInput
           value={search}
           placeholder="Buscar pelo anime..."
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={event => setSearch(event.target.value)}
         />
         <Styles.SearchButton type="submit">
           <Styles.SearchButtonIcon />
@@ -72,5 +73,5 @@ export default function Home() {
         </Styles.ResultsContainer>
       )}
     </Styles.Container>
-  );
+  )
 }
