@@ -87,7 +87,7 @@
     "win": {
       "icon": "dist/icon.ico",
       "target": [
-        "nsis",
+        "nsis"
       ]
     },
     "files": [

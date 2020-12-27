@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import Plyr from 'plyr'
+import poster from '../assets/poster.jpg'
 
 export interface PlayerProps {
   info: { url: string; currentTime?: number }
@@ -48,7 +49,7 @@ const Player: React.FC<PlayerProps> = ({ info, closeButtonClick }) => {
   }, [])
 
   return (
-    <video id="player" data-poster="/poster.jpg">
+    <video id="player" data-poster={poster}>
       <source src={info.url} type="video/mp4" />
     </video>
   )
