@@ -14,7 +14,6 @@ function createWindow() {
     height: 600,
     minWidth: 672,
     minHeight: 548,
-    autoHideMenuBar: true,
     backgroundColor: '#282a36',
     webPreferences: {
       devTools: process.env.NODE_ENV === 'development',
@@ -25,6 +24,7 @@ function createWindow() {
   })
 
   if (process.env.NODE_ENV === 'development') {
+    mainWindow.setAutoHideMenuBar(true)
     mainWindow.loadURL('http://localhost:4000')
     mainWindow.webContents.openDevTools()
   } else {
