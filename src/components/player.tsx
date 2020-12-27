@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import Plyr from 'plyr'
 
 export interface PlayerProps {
-  url: string
-  closeButtonClick: () => void
+  info: { url: string; currentTime?: number }
+  closeButtonClick: (player: Plyr) => void
 }
 
-const Player: React.FC<PlayerProps> = ({ url, closeButtonClick }) => {
+const Player: React.FC<PlayerProps> = ({ info, closeButtonClick }) => {
   useEffect(() => {
     const controls = `
       <button id="player-close">
@@ -31,16 +31,25 @@ const Player: React.FC<PlayerProps> = ({ url, closeButtonClick }) => {
     `
 
     // eslint-disable-next-line no-new
-    new Plyr('#player', { controls, autoplay: true })
+    const player = new Plyr('#player', { controls, autoplay: true })
+    // player.poster = 'poster.jpg'
+
+    let setTime = true
+    player.on('playing', () => {
+      if (info.currentTime && setTime) {
+        player.currentTime = info.currentTime
+      }
+      setTime = false
+    })
 
     document
       .getElementById('player-close')
-      ?.addEventListener('click', closeButtonClick)
+      ?.addEventListener('click', () => closeButtonClick(player))
   }, [])
 
   return (
-    <video id="player">
-      <source src={url} type="video/mp4" />
+    <video id="player" data-poster="/poster.jpg">
+      <source src={info.url} type="video/mp4" />
     </video>
   )
 }

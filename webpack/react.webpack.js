@@ -21,7 +21,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+        test: /\.(eot|svg|ttf|woff|woff2|otf|jpe?g)$/,
         use: [
           {
             loader: 'file-loader',
@@ -53,5 +53,5 @@ module.exports = {
     filename: 'js/[name].js',
     publicPath: './'
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [new HtmlWebpackPlugin({ title: 'Animes-BR Player' })]
 }

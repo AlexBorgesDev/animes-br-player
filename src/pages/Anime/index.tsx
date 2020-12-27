@@ -16,6 +16,11 @@ function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
 
+interface View {
+  episode: number
+  currentTime?: number
+}
+
 interface AnimeObject {
   name: string
   image: string
@@ -26,13 +31,15 @@ interface AnimeObject {
 export default function Anime(): JSX.Element {
   const query = useQuery()
 
+  const [views, setViews] = useState<View[]>([])
+
   const [anime, setAnime] = useState<AnimeObject>({} as AnimeObject)
   const [episodes, setEpisodes] = useState<Episode[]>([])
 
   const [loading, setLoading] = useState(true)
   const [disabled, setDisabled] = useState(false)
 
-  const [playerURL, setPlayerURL] = useState('')
+  const [playerInfo, setPlayerInfo] = useState({ url: '', episode: 0 })
   const [activePlayer, setActivePlayer] = useState(false)
 
   const [episodeSearch, setEpisodeSearch] = useState('')
@@ -50,8 +57,19 @@ export default function Anime(): JSX.Element {
     setEpisodes(results)
   }
 
-  function closePlayer() {
-    setPlayerURL('')
+  function closePlayer(player: Plyr) {
+    const newViews = views.filter(view => view.episode !== playerInfo.episode)
+    newViews.push({
+      episode: playerInfo.episode,
+      currentTime: player.currentTime
+    })
+
+    setViews(newViews)
+    const animePage = query.get('page')
+    animePage && localStorage.setItem(animePage, JSON.stringify(newViews))
+
+    player.destroy()
+    setPlayerInfo({ url: '', episode: 0 })
     setActivePlayer(false)
 
     document.title = `Animes-BR Player - ${anime.name}`
@@ -72,7 +90,7 @@ export default function Anime(): JSX.Element {
       return alert('Ops! Erro ao buscar o link do episódio.')
     }
 
-    setPlayerURL(episodeURL)
+    setPlayerInfo({ url: episodeURL, episode: ep })
     setActivePlayer(true)
 
     const title = document.title
@@ -81,7 +99,17 @@ export default function Anime(): JSX.Element {
     setDisabled(false)
   }
 
+  function getViews() {
+    const page = query.get('page')
+    if (!page) return
+
+    const storage = localStorage.getItem(page)
+    storage && setViews(JSON.parse(storage))
+  }
+
   useEffect(() => {
+    getViews()
+
     const initAnime = {} as AnimeObject
     initAnime.name = query.get('name') || ''
     initAnime.image = query.get('image') || ''
@@ -166,6 +194,9 @@ export default function Anime(): JSX.Element {
                 <p>Episódio {episode.episode}</p>
 
                 <div>
+                  {views.filter(view => view.episode === episode.episode)
+                    .length === 1 && <Styles.EyeIcon />}
+
                   <button
                     onClick={() =>
                       getVideoLink(episode.page, 'SD', episode.episode)
@@ -195,7 +226,15 @@ export default function Anime(): JSX.Element {
 
       {activePlayer && (
         <Styles.PlayerContainer>
-          <Player url={playerURL} closeButtonClick={closePlayer} />
+          <Player
+            info={{
+              url: playerInfo.url,
+              currentTime:
+                views.filter(view => view.episode === playerInfo.episode)[0]
+                  ?.currentTime || undefined
+            }}
+            closeButtonClick={closePlayer}
+          />
         </Styles.PlayerContainer>
       )}
     </Styles.Container>

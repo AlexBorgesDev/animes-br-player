@@ -17,8 +17,10 @@ function createWindow() {
     autoHideMenuBar: true,
     backgroundColor: '#282a36',
     webPreferences: {
+      devTools: process.env.NODE_ENV === 'development',
       webSecurity: false,
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 

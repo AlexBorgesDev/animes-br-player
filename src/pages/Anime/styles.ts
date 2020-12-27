@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { FiArrowLeft, FiSearch, FiPlay } from 'react-icons/fi'
+import { FiArrowLeft, FiSearch, FiPlay, FiEye } from 'react-icons/fi'
 
 export const Container = styled.main`
   width: 100%;
@@ -205,6 +205,14 @@ export const EpisodesItemsContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+`
+
+export const EyeIcon = styled(FiEye)`
+  width: 20px;
+  height: 20px;
+  color: ${props => props.theme.color};
+
+  margin-right: 18px;
 `
 
 interface EpisodeItemContainerProps {

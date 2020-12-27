@@ -1,6 +1,6 @@
 {
   "name": "animes-br-player",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Player de animes legendados em pt-br, com busca automática inclusa.",
   "main": "./dist/main.js",
   "dependencies": {
