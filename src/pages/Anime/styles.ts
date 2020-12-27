@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { FiArrowLeft, FiSearch, FiPlay } from "react-icons/fi";
+import { FiArrowLeft, FiSearch, FiPlay } from 'react-icons/fi'
 
 export const Container = styled.main`
   width: 100%;
@@ -9,7 +9,7 @@ export const Container = styled.main`
 
   margin: 0 auto;
   padding: 24px;
-`;
+`
 
 export const LoadingContainer = styled.section`
   width: 100%;
@@ -19,7 +19,7 @@ export const LoadingContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const TopBarContainer = styled.nav`
   width: 100%;
@@ -37,24 +37,24 @@ export const TopBarContainer = styled.nav`
     justify-content: center;
 
     font: 400 1.5rem/1.5 Poppins, sans-serif;
-    color: ${(props) => props.theme.color};
+    color: ${props => props.theme.color};
     text-decoration: none;
 
     transition: filter 0.25s ease-in-out;
   }
-`;
+`
 
 export const BackIcon = styled(FiArrowLeft)`
   width: 24px;
   height: 24px;
-  color: ${(props) => props.theme.color};
-`;
+  color: ${props => props.theme.color};
+`
 
 export const AnimeContainer = styled.section`
   width: 100%;
   display: flex;
   margin-top: 24px;
-`;
+`
 
 export const AnimeImageContainer = styled.div`
   width: 100%;
@@ -68,13 +68,13 @@ export const AnimeImageContainer = styled.div`
   justify-content: center;
   overflow: hidden;
   border-radius: 2.5px;
-  background-color: ${(props) => props.theme.backgroundInPrimary};
+  background-color: ${props => props.theme.backgroundInPrimary};
 
   > img {
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 export const AnimeInfoItemsContainer = styled.div`
   overflow: hidden;
@@ -117,7 +117,7 @@ export const AnimeInfoItemsContainer = styled.div`
       font: 400 1.5rem/1.5 Poppins, sans-serif;
     }
   }
-`;
+`
 
 export const EpisodesContainer = styled.section`
   width: 100%;
@@ -130,8 +130,8 @@ export const EpisodesContainer = styled.section`
 
   overflow: hidden;
   border-radius: 2.5px;
-  background-color: ${(props) => props.theme.backgroundInPrimary};
-`;
+  background-color: ${props => props.theme.backgroundInPrimary};
+`
 
 export const SearchEpisode = styled.form`
   width: 100%;
@@ -148,7 +148,7 @@ export const SearchEpisode = styled.form`
   -moz-box-shadow: 0px 0 8px 0px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0 8px 0px rgba(0, 0, 0, 0.4);
 
-  background-color: ${(props) => props.theme.backgroundInPrimaryListSearch};
+  background-color: ${props => props.theme.backgroundInPrimaryListSearch};
 
   > input {
     flex: 1;
@@ -157,14 +157,14 @@ export const SearchEpisode = styled.form`
     padding: 0 16px;
 
     font: 400 1.5rem/1.5 Poppins, sans-serif;
-    color: ${(props) => props.theme.color};
+    color: ${props => props.theme.color};
 
     border: 0;
     outline: none;
     background-color: transparent;
 
     ::placeholder {
-      color: ${(props) => props.theme.color};
+      color: ${props => props.theme.color};
     }
 
     ::-webkit-outer-spin-button,
@@ -187,14 +187,14 @@ export const SearchEpisode = styled.form`
     outline: none;
     background-color: transparent;
   }
-`;
+`
 
 export const SearchButtonIcon = styled(FiSearch)`
   width: 22px;
   height: 22px;
 
-  color: ${(props) => props.theme.color};
-`;
+  color: ${props => props.theme.color};
+`
 
 export const EpisodesItemsContainer = styled.div`
   width: 100%;
@@ -205,10 +205,10 @@ export const EpisodesItemsContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-`;
+`
 
 interface EpisodeItemContainerProps {
-  disabled?: boolean;
+  disabled?: boolean
 }
 
 export const EpisodeItemContainer = styled.div<EpisodeItemContainerProps>`
@@ -223,12 +223,12 @@ export const EpisodeItemContainer = styled.div<EpisodeItemContainerProps>`
   justify-content: space-between;
 
   & + div {
-    border-top: 1px solid ${(props) => props.theme.inputBackground};
+    border-top: 1px solid ${props => props.theme.inputBackground};
   }
 
   > p {
     font: 500 1.5rem/1.5 Poppins, sans-serif;
-    color: ${(props) => props.theme.color};
+    color: ${props => props.theme.color};
   }
 
   > div {
@@ -243,7 +243,7 @@ export const EpisodeItemContainer = styled.div<EpisodeItemContainerProps>`
       padding: 0 12px;
 
       font: 500 1.5rem/1.5 Poppins, sans-serif;
-      color: ${(props) => props.theme.color};
+      color: ${props => props.theme.color};
 
       display: flex;
       align-items: center;
@@ -255,16 +255,16 @@ export const EpisodeItemContainer = styled.div<EpisodeItemContainerProps>`
 
       cursor: pointer;
       outline: none;
-      background-color: ${(props) =>
+      background-color: ${props =>
         props.disabled
           ? props.theme.inputBackgroundDisabled
           : props.theme.inputBackground};
 
       :hover {
-        ${(props) =>
+        ${props =>
           props.disabled
-            ? "filter: brightness(100%);"
-            : "filter: brightness(90%);"};
+            ? 'filter: brightness(100%);'
+            : 'filter: brightness(90%);'};
       }
 
       > svg {
@@ -276,13 +276,13 @@ export const EpisodeItemContainer = styled.div<EpisodeItemContainerProps>`
       }
     }
   }
-`;
+`
 
 export const EpisodeItemPlayIcon = styled(FiPlay)`
   width: 20px;
   height: 20px;
-  color: ${(props) => props.theme.color};
-`;
+  color: ${props => props.theme.color};
+`
 
 export const PlayerContainer = styled.div`
   width: 100%;
@@ -342,4 +342,4 @@ export const PlayerContainer = styled.div`
     pointer-events: none;
     transform: translateY(-100%);
   }
-`;
+`

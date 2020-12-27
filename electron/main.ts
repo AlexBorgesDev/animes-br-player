@@ -18,13 +18,13 @@ function createWindow() {
     backgroundColor: '#282a36',
     webPreferences: {
       webSecurity: false,
-      nodeIntegration: true,
-      contextIsolation: true
+      nodeIntegration: true
     }
   })
 
   if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('http://localhost:4000')
+    mainWindow.webContents.openDevTools()
   } else {
     mainWindow.setMenuBarVisibility(false)
 

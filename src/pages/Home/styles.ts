@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { FiSearch } from "react-icons/fi";
+import { FiSearch } from 'react-icons/fi'
 
 export const Container = styled.main`
   width: 100%;
@@ -15,7 +15,7 @@ export const Container = styled.main`
 
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const LoadingContainer = styled.section`
   width: 100%;
@@ -25,12 +25,12 @@ export const LoadingContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const Title = styled.h1`
   font-size: 3.2rem;
   font-weight: 700;
-`;
+`
 
 export const SearchContainer = styled.form`
   width: 100%;
@@ -47,8 +47,8 @@ export const SearchContainer = styled.form`
   overflow: hidden;
   border-radius: 2.4rem;
 
-  background-color: ${(props) => props.theme.inputBackground};
-`;
+  background-color: ${props => props.theme.inputBackground};
+`
 
 export const SearchInput = styled.input`
   flex: 1;
@@ -58,16 +58,16 @@ export const SearchInput = styled.input`
   padding: 0 16px;
 
   font: 400 1.4rem/1.5 Poppins, sans-serif;
-  color: ${(props) => props.theme.color};
+  color: ${props => props.theme.color};
 
   border: 0;
   outline: none;
   background-color: transparent;
 
   ::placeholder {
-    color: ${(props) => props.theme.color};
+    color: ${props => props.theme.color};
   }
-`;
+`
 
 export const SearchButton = styled.button`
   width: 48px;
@@ -88,14 +88,14 @@ export const SearchButton = styled.button`
   :hover {
     filter: brightness(90%);
   }
-`;
+`
 
 export const SearchButtonIcon = styled(FiSearch)`
   width: 22px;
   height: 22px;
 
-  color: ${(props) => props.theme.color};
-`;
+  color: ${props => props.theme.color};
+`
 
 export const ResultsContainer = styled.section`
   width: 100%;
@@ -111,7 +111,7 @@ export const ResultsContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-`;
+`
 
 export const ResultItemContainer = styled.div`
   width: 168.63px;
@@ -127,7 +127,7 @@ export const ResultItemContainer = styled.div`
   cursor: pointer;
   overflow: hidden;
   border-radius: 2.5px;
-  background-color: ${(props) => props.theme.backgroundInPrimary};
+  background-color: ${props => props.theme.backgroundInPrimary};
 
   -webkit-box-shadow: 0px 0px 8px 0px rgba(36, 36, 36, 1);
   -moz-box-shadow: 0px 0px 8px 0px rgba(36, 36, 36, 1);
@@ -164,4 +164,4 @@ export const ResultItemContainer = styled.div`
       text-align: center;
     }
   }
-`;
+`
